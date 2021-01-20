@@ -1,0 +1,1 @@
+export default ['I feel like','Do you think','It is funny how']

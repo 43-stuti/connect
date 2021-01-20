@@ -1,23 +1,27 @@
 import rw from '@runwayml/hosted-models';
-import * as fs from 'fs';
 import puppeteer from 'puppeteer';
 import friends from './friends.js';
-const model = new rw.HostedModel({
+import prompt from './prompt.js';
+export default function(){
+  const model = new rw.HostedModel({
     url: "https://training-text-experiment-2-1-22a6f52c.hosted-models.runwayml.cloud/v1/",
     token: "0dBa6HI0+XjZ8taZAgJzSA==",
   });
-  //// You can use the info() method to see what type of input object the model expects
-  // model.info().then(info => console.log(info));
+  
+  //fetching a randomly generated text from runway
   let seed = Math.floor(Math.random()*300);
+  let runwayPrompt = Math.floor(Math.random()*(prompt.length-1));
+  console.log('runwayPrompt',runwayPrompt)
   const inputs = {
-    "prompt": "Do you think",
+    "prompt": prompt[runwayPrompt],
     "max_characters": 300,
     "top_p": 0.9,
     "seed": seed
   };
   model.query(inputs).then(async function(outputs) {
     const { generated_text, encountered_end } = outputs;
-    console.log('GENERATED TEXT',generated_text)
+
+    //logging in to instgram and sending the message to a selected person using puppeteer
     const browser = await puppeteer.launch({headless:false});
         const page = await browser.newPage();
         await page.goto("https://www.instagram.com/direct/inbox/");
@@ -51,3 +55,4 @@ const model = new rw.HostedModel({
 
         }
   });
+}
