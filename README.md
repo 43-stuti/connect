@@ -1,7 +1,11 @@
 # connect
 
 #### Overview 
-![](https://user-images.githubusercontent.com/12654691/105178414-ff33bc00-5af5-11eb-97f2-49611b4d03ad.jpeg)
+
+<img src="https://user-images.githubusercontent.com/12654691/105178414-ff33bc00-5af5-11eb-97f2-49611b4d03ad.jpeg" height=500px width="800px">
+</img>
+
+
 I love it when given the chance to talk to someone completely out of the blue but I usually lack the courage to take the initiative. 
 It is also painful to find intersting conversation starters(something that doesn't just end up being "Hey! How are you doing").
 
