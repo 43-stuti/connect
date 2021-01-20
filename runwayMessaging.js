@@ -2,16 +2,15 @@ import rw from '@runwayml/hosted-models';
 import puppeteer from 'puppeteer';
 import friends from './friends.js';
 import prompt from './prompt.js';
-export default function(){
+export default function(data){
   const model = new rw.HostedModel({
-    url: "https://training-text-experiment-2-1-22a6f52c.hosted-models.runwayml.cloud/v1/",
-    token: "0dBa6HI0+XjZ8taZAgJzSA==",
+    url: data.rwurl,
+    token: data.rwtoken,
   });
   
   //fetching a randomly generated text from runway
   let seed = Math.floor(Math.random()*300);
   let runwayPrompt = Math.floor(Math.random()*(prompt.length-1));
-  console.log('runwayPrompt',runwayPrompt)
   const inputs = {
     "prompt": prompt[runwayPrompt],
     "max_characters": 300,
@@ -28,14 +27,13 @@ export default function(){
         let useFacebook = await page.waitForSelector('.yWX7d');
         await useFacebook.click();
 
-        //page.waitForSelector("[aria-label='Email address or phone number']");
-        //await email.click();
-        //await page.$eval("[aria-label='Email address or phone number']", el => el.value = 'stutspices@yahoo.co.in');
+        page.waitForSelector("[aria-label='Email address or phone number']");
+        await email.click();
         await page.waitForTimeout(3000);
-        //await page.type("[aria-label='Email address or phone number']",'stuti.mohgaonkar@gmail.com');
-        //await page.type("[aria-label='Password']",'icecreaminmagie');
-        //let login = await page.waitForSelector('._52e0');
-        //await login.click();
+        await page.type("[aria-label='Email address or phone number']",data.instauser);
+        await page.type("[aria-label='Password']",data.instapwd);
+        let login = await page.waitForSelector('._52e0');
+        await login.click();
 
         await page.waitForTimeout(30000);
         const getThemAll = await page.$$('.DPiy6');
